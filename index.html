@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090d17">
+  <meta name="description" content="Jarvis Calendar — your personal calendar, homework planner, and countdown dashboard.">
+  <title>Jarvis Calendar</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Jarvis Calendar home"><span class="brand-mark">J</span><span>JARVIS<span class="brand-light"> CALENDAR</span></span></a>
+      <div class="top-actions">
+        <div class="profile-pill"><span class="online-dot"></span><span id="profile-label">My profile</span><button id="profile-button" class="icon-button" title="Profile and sharing" aria-label="Profile and sharing">⌄</button></div>
+        <button class="avatar" id="profile-avatar" aria-label="Change profile name">J</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="welcome-row">
+        <div><p class="eyebrow" id="today-label">YOUR DAY, IN FOCUS</p><h1>Good <span id="greeting">morning</span>, <span id="hello-name">there</span><span class="wave">✦</span></h1><p class="subhead">Here’s what’s coming up. You’ve got this.</p></div>
+        <button class="primary-button calendar-open" id="open-calendar"><span class="button-icon">▦</span> Calendar <span class="button-plus">＋</span></button>
+      </section>
+
+      <section class="hero-grid" aria-label="Overview widgets">
+        <article class="clock-card panel"><div class="card-top"><span class="eyebrow">LOCAL TIME</span><span class="live-tag"><i></i> LIVE</span></div><div class="clock" id="clock">--:--<span>--</span></div><div class="clock-foot"><span id="full-date">Loading date</span><span class="timezone" id="timezone">LOCAL</span></div><div class="clock-decoration"></div></article>
+        <article class="focus-card panel"><div class="card-top"><span class="eyebrow">NEXT UP</span><span class="tiny-icon">↗</span></div><div id="next-up-content" class="next-up-content"></div><div class="progress-track"><span id="next-progress"></span></div><div class="next-foot"><span id="next-foot-label">Your schedule is clear</span><span id="next-counter"></span></div></article>
+        <article class="stat-card panel"><div class="stat-icon violet">✧</div><span class="eyebrow">UPCOMING</span><strong id="event-count">0</strong><span class="stat-caption">calendar events</span><div class="stat-sparkline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="stat-card panel"><div class="stat-icon mint">✓</div><span class="eyebrow">HOMEWORK DUE</span><strong id="homework-count">0</strong><span class="stat-caption">to keep on your radar</span><div class="mini-checks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="main-column">
+          <section class="section-block"><div class="section-heading"><div><p class="eyebrow">DON’T LET TIME SNEAK UP</p><h2>Countdowns <span id="countdown-total" class="count-badge">0</span></h2></div><button class="text-button" id="add-event-shortcut">＋ Add event</button></div><div class="countdown-grid" id="countdown-grid"></div></section>
+          <section class="section-block agenda-block"><div class="section-heading"><div><p class="eyebrow">THE PLAN</p><h2>Coming up</h2></div><button class="text-button" id="view-all-button">View all <span>→</span></button></div><div class="agenda-list panel" id="agenda-list"></div></section>
+        </div>
+        <aside class="side-column">
+          <section class="homework-card panel"><div class="section-heading compact"><div><p class="eyebrow">STAY ON TOP OF IT</p><h2>Homework</h2></div><button id="add-homework" class="round-add" aria-label="Add homework">＋</button></div><div class="homework-summary"><span id="homework-summary">Nothing due soon</span><span class="homework-meter"><i id="homework-meter-fill"></i></span></div><div id="homework-list" class="homework-list"></div><button class="homework-add" id="add-homework-bottom">＋ Add homework</button></section>
+          <section class="voice-card panel"><div class="voice-orb"><span>✳</span><i></i></div><div class="voice-copy"><p class="eyebrow">YOUR PERSONAL ASSISTANT</p><h3>Just say <span>“Hey Jarvis”</span></h3><p id="voice-hint">Ask how long until your next event.</p></div><button id="voice-toggle" class="voice-toggle" aria-label="Enable voice listening"><span class="mic-icon">◉</span></button><div class="voice-status" id="voice-status"><i></i><span>Voice is off</span></div></section>
+          <section class="tip-card"><span class="tip-spark">✦</span><div><p class="eyebrow">QUICK TIP</p><p id="daily-tip">Small steps today make tomorrow easier.</p></div><button id="next-tip" aria-label="Next tip">↗</button></section>
+        </aside>
+      </section>
+      <footer class="footer"><span>JARVIS CALENDAR <span class="footer-dot">·</span> YOUR SPACE, YOUR PACE</span><button id="export-button">Export your data</button></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="calendar-modal" aria-hidden="true"><section class="modal calendar-modal" role="dialog" aria-modal="true" aria-labelledby="editor-title"><header class="modal-header"><div><p class="eyebrow">YOUR PERSONAL PLANNER</p><h2 id="editor-title">Calendar</h2></div><button class="close-button" data-close aria-label="Close">×</button></header><div class="modal-tabs"><button class="tab active" data-tab="items">Events & homework</button><button class="tab" data-tab="calendar">Month view</button></div><div class="editor-layout"><form id="item-form" class="item-form"><input type="hidden" id="item-id"><div class="form-title-row"><span class="form-symbol" id="form-symbol">✦</span><div><p class="eyebrow" id="form-mode">NEW ITEM</p><h3 id="form-heading">Add to your calendar</h3></div></div><label>What’s it called?<input id="item-title" maxlength="90" required placeholder="e.g. Science project due"></label><div class="form-two"><label>Type<select id="item-type"><option value="event">Event</option><option value="homework">Homework</option></select></label><label>Date<input type="date" id="item-date" required></label></div><div class="form-two"><label>Time<input type="time" id="item-time"></label><label>Category<select id="item-category"><option>Personal</option><option>School</option><option>Work</option><option>Health</option><option>Social</option><option>Other</option></select></label></div><label>Notes <span class="optional">OPTIONAL</span><textarea id="item-notes" rows="3" maxlength="500" placeholder="Add a few details…"></textarea></label><div class="form-buttons"><button type="button" id="cancel-edit" class="secondary-button hidden">Cancel edit</button><button type="submit" class="primary-button">Save item <span>→</span></button></div></form><div class="editor-items"><div class="editor-list-head"><div><p class="eyebrow">YOUR SCHEDULE</p><h3 id="editor-list-title">Upcoming items</h3></div><span class="count-badge" id="editor-count">0</span></div><div id="editor-list" class="editor-list"></div></div></div><div class="month-panel hidden" id="month-panel"><div class="month-nav"><button id="month-prev" aria-label="Previous month">←</button><h3 id="month-name"></h3><button id="month-next" aria-label="Next month">→</button></div><div class="month-grid" id="month-grid"></div></div></section></div>
+
+  <div class="modal-backdrop" id="profile-modal" aria-hidden="true"><section class="modal profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title"><header class="modal-header"><div><p class="eyebrow">MAKE IT YOURS</p><h2 id="profile-title">Profile & sharing</h2></div><button class="close-button" data-close aria-label="Close">×</button></header><form id="profile-form"><label>Your name<input id="name-input" maxlength="32" placeholder="What should Jarvis call you?"></label><label>Profile ID<div class="input-with-button"><input id="profile-id-input" readonly><button type="button" id="new-profile-id" class="secondary-button">New ID</button></div></label><p class="share-note">Your profile ID gives this browser a personal space. To use the same data on another device, create a share link or export your profile and open/import it there. GitHub Pages has no private database, so changes do not sync automatically.</p><div class="share-actions"><button type="button" class="secondary-button" id="copy-link">Copy share link</button><button type="button" class="secondary-button" id="profile-export">Export profile</button><label class="import-label secondary-button">Import profile<input id="profile-import" type="file" accept="application/json,.json"></label></div><button class="primary-button profile-save" type="submit">Save profile</button></form></section></div>
+  <div class="toast" id="toast" role="status"></div><input id="import-file" type="file" accept="application/json,.json" hidden>
+  <script src="app.js"></script>
+</body>
+</html>
